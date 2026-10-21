@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#14281f" />
+    <title>Lo que te mueve — Club de intereses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}" />
+  </head>
+  <body>
+    <main class="poster">
+      <header class="topbar">
+        <a class="brand" href="{{ url_for('routes.inicio') }}">
+          <span class="brand-mark">C</span>
+          <span>CLUB<span class="brand-period">.</span></span>
+        </a>
+        <span class="edition"><span class="live-dot"></span> COMUNIDAD ABIERTA</span>
+        <span class="issue">EDICIÓN <b>001</b> / 2026</span>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="kicker"><span>UNA PREGUNTA, MUCHAS FORMAS DE SER</span> <b>✳</b></p>
+          <h1 id="page-title">¿QUÉ TE<br />MUE<span>VE</span><i>?</i></h1>
+          <div class="hero-bottom">
+            <p class="intro">
+              Música a todo volumen. Goles en el último minuto. Historias que
+              no puedes soltar. <strong>Este espacio empieza contigo.</strong>
+            </p>
+            <div class="quick-interests" aria-label="Ejemplos de intereses">
+              <span>♫ música</span><span>⚽ deporte</span><span>▣ series</span>
+              <span>⌘ juegos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <span class="art-number">01</span>
+          <span class="art-note note-top">TU<br />ESPACIO</span>
+          <img
+            src="{{ url_for('static', filename='img/estudiante.svg') }}"
+            alt="Estudiante compartiendo sus intereses desde una computadora"
+          />
+          <span class="art-sticker">SÉ<br />TÚ <b>✳</b></span>
+          <span class="art-caption">HECHO PARA PERSONAS CURIOSAS ↗</span>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="form-title">
+        <div class="form-heading">
+          <span class="form-index">01 / TU FICHA</span>
+          <h2 id="form-title">Rompamos el hielo.</h2>
+          <p>Un minuto. Dos respuestas. Nuevas conexiones.</p>
+        </div>
+
+        {% if error %}
+          <div class="error-message" role="alert">{{ error }}</div>
+        {% endif %}
+
+        <form class="interest-form" action="{{ url_for('routes.enviar') }}" method="post">
+          <div class="field">
+            <label for="nombre">¿CÓMO TE LLAMAS?</label>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              placeholder="Tu nombre"
+              value="{{ nombre or '' }}"
+              maxlength="60"
+              autocomplete="name"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="interes">¿QUÉ TE GUSTA?</label>
+            <select id="interes" name="interes" required>
+              <option value="" disabled selected>Elige tu mundo</option>
+              {% for clave, etiqueta in intereses.items() %}
+                <option value="{{ clave }}">{{ etiqueta }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button class="submit-button" type="submit">
+            <span>ME APUNTO</span><b aria-hidden="true">↗</b>
+          </button>
+        </form>
+        <p class="form-footnote"><span>✳</span> Sin respuestas correctas. Solo lo que te hace ser tú.</p>
+      </section>
+
+      <footer class="footer">
+        <span>UN PROYECTO PARA CONECTAR <b>●</b></span>
+        <span>CREADO CON FLASK &amp; BUENA ONDA</span>
+        <span>¿LISTO? <b>VAMOS.</b></span>
+      </footer>
+    </main>
+  </body>
+</html>

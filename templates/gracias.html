@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#14281f" />
+    <title>¡Ya eres parte, {{ nombre }}! — Club de intereses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}" />
+  </head>
+  <body>
+    <main class="poster thanks-poster">
+      <header class="topbar">
+        <a class="brand" href="{{ url_for('routes.inicio') }}">
+          <span class="brand-mark">C</span>
+          <span>CLUB<span class="brand-period">.</span></span>
+        </a>
+        <span class="edition"><span class="live-dot"></span> COMUNIDAD ABIERTA</span>
+        <span class="issue">EDICIÓN <b>001</b> / 2026</span>
+      </header>
+
+      <section class="thanks-layout">
+        <div class="thanks-copy">
+          <p class="kicker"><span>FICHA RECIBIDA</span> <b>✳</b></p>
+          <h1>YA ERES<br />PARTE<span>.</span></h1>
+          <p class="thanks-message">
+            Qué bueno tenerte por aquí, <strong>{{ nombre }}</strong>. Nos queda
+            claro que lo tuyo es:
+          </p>
+          <div class="chosen-interest interest-{{ interes_id }}">
+            <span aria-hidden="true">
+              {% if interes_id == "musica" %}♫
+              {% elif interes_id == "videojuegos" %}⌘
+              {% elif interes_id == "deportes" %}⚽
+              {% elif interes_id == "series" %}▣
+              {% elif interes_id == "lectura" %}▤
+              {% else %}✿{% endif %}
+            </span>
+            {{ interes }}
+          </div>
+          <a class="submit-button back-button" href="{{ url_for('routes.inicio') }}">
+            <span>INVITAR A ALGUIEN MÁS</span><b aria-hidden="true">↗</b>
+          </a>
+        </div>
+        <div class="thanks-visual" aria-hidden="true">
+          <span class="thanks-spark">✳</span>
+          <span class="thanks-stamp">NUEVA<br />CONEXIÓN<br /><b>✦</b></span>
+          <img src="{{ url_for('static', filename='img/estudiante.svg') }}" alt="" />
+          <span class="thanks-number">02</span>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>UN PROYECTO PARA CONECTAR <b>●</b></span>
+        <span>CREADO CON FLASK &amp; BUENA ONDA</span>
+        <span>¿LISTO? <b>VAMOS.</b></span>
+      </footer>
+    </main>
+  </body>
+</html>
